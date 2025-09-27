@@ -22,6 +22,11 @@ public sealed class Command
     /// </summary>
     public string FullName { get; }
 
+    /// <summary>
+    /// 获取处理该指令的方法信息
+    /// </summary>
+    public MethodInfo HandlerMethodInfo => InnerMethod!;
+
     internal List<CommandParameter> Parameters { get; } = [];
     internal List<CommandOption>    Options    { get; } = [];
 
