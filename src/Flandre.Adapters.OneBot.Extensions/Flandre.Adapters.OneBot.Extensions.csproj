@@ -9,7 +9,7 @@
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageIcon>avatar.jpg</PackageIcon>
 
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <OutputType>Library</OutputType>
@@ -19,6 +19,7 @@
         <RepositoryUrl>https://github.com/FlandreDevs/Flandre.git</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <Copyright>FlandreDevs (C) 2022-2023</Copyright>
+        <LangVersion>default</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>

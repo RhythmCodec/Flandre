@@ -10,7 +10,7 @@
         <PackageIcon>avatar.jpg</PackageIcon>
         <PackageReadmeFile>README.md</PackageReadmeFile>
 
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <OutputType>Library</OutputType>
@@ -21,6 +21,7 @@
         <RepositoryUrl>https://github.com/FlandreDevs/Flandre.git</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <Copyright>FlandreDevs (C) 2022-2023</Copyright>
+        <LangVersion>default</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>
@@ -28,7 +29,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Websocket.Client" Version="4.4.43"/>
+        <PackageReference Include="Websocket.Client" Version="5.3.0" />
     </ItemGroup>
 
     <ItemGroup>
