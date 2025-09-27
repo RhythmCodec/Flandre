@@ -22,15 +22,15 @@ public sealed class Command
     /// </summary>
     public string FullName { get; }
 
-    internal List<CommandParameter> Parameters { get; } = new();
-    internal List<CommandOption> Options { get; } = new();
+    internal List<CommandParameter> Parameters { get; } = [];
+    internal List<CommandOption>    Options    { get; } = [];
 
     /// <summary>
     /// Contains alias command path
     /// </summary>
-    internal List<string> Aliases { get; } = new();
+    internal List<string> Aliases { get; } = [];
 
-    internal List<CommandShortcut> Shortcuts { get; } = new();
+    internal List<CommandShortcut> Shortcuts { get; } = [];
 
     /// <summary>
     /// 调用指令方法的目标。如果不为 null 代表该方法是一个委托，否则为指令方法。
@@ -58,7 +58,7 @@ public sealed class Command
         FullName = fullName;
     }
 
-    private void InferFromMethod(MethodBase method)
+    private void InferFromMethod(MethodInfo method)
     {
         Options.Clear();
         Parameters.Clear();

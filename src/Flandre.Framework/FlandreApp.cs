@@ -22,8 +22,8 @@ public sealed partial class FlandreApp : IHost, ICommandRouteBuilder, IAsyncDisp
     private readonly IOptionsMonitor<FlandreAppOptions> _appOptions;
     private readonly List<IAdapter> _adapters;
     private readonly List<Type> _pluginTypes;
-    private readonly List<Func<MiddlewareContext, Func<Task>, Task>> _middleware = new();
-    private readonly List<Bot> _bots = new();
+    private readonly List<Func<MiddlewareContext, Func<Task>, Task>> _middleware = [];
+    private readonly List<Bot> _bots = [];
     private bool _eventsSubscribedOnce;
     private bool _isStopped = true;
 
@@ -111,21 +111,6 @@ public sealed partial class FlandreApp : IHost, ICommandRouteBuilder, IAsyncDisp
         if (_eventsSubscribedOnce) return;
         _eventsSubscribedOnce = true;
 
-        void WithCatch(Type pluginType, Func<Plugin, Task> subscriber, string? eventName = null) => Task.Run(async () =>
-        {
-            try
-            {
-                using var scope = Services.CreateScope();
-                var plugin = (Plugin)scope.ServiceProvider.GetRequiredService(pluginType);
-                await subscriber.Invoke(plugin);
-            }
-            catch (Exception e)
-            {
-                var logger = Services.GetRequiredService<ILoggerFactory>().CreateLogger(pluginType);
-                logger.LogError(e, "Error occurred while handling {EventName}", eventName ?? "event");
-            }
-        });
-
         foreach (var bot in _bots)
         {
             bot.MessageReceived += (_, e) => Task.Run(async () =>
@@ -167,10 +152,26 @@ public sealed partial class FlandreApp : IHost, ICommandRouteBuilder, IAsyncDisp
                     Services.GetRequiredService<ILoggerFactory>()
                         .CreateLogger(adapterType.FullName ?? adapterType.Name)
                         // ReSharper disable once TemplateIsNotCompileTimeConstantProblem
-                        .Log((LogLevel)e.LogLevel, e.LogMessage);
+                        .Log((LogLevel)e.LogLevel, "{logMessage}", e.LogMessage);
         }
 
         Logger.LogDebug("All bot events subscribed");
+        return;
+
+        void WithCatch(Type pluginType, Func<Plugin, Task> subscriber, string? eventName = null) => Task.Run(async () =>
+        {
+            try
+            {
+                using var scope = Services.CreateScope();
+                var plugin = (Plugin)scope.ServiceProvider.GetRequiredService(pluginType);
+                await subscriber.Invoke(plugin);
+            }
+            catch (Exception e)
+            {
+                var logger = Services.GetRequiredService<ILoggerFactory>().CreateLogger(pluginType);
+                logger.LogError(e, "Error occurred while handling {EventName}", eventName ?? "event");
+            }
+        });
     }
 
     /// <summary>

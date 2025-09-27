@@ -27,6 +27,9 @@ public static class CommandNodeExtensions
     {
         var count = 0;
 
+        CountNodeCommands(node);
+        return count;
+
         void CountNodeCommands(CommandNode nowNode)
         {
             if (nowNode is { HasCommand: true, IsAlias: false })
@@ -34,8 +37,5 @@ public static class CommandNodeExtensions
             foreach (var (_, subNode) in nowNode.SubNodes)
                 CountNodeCommands(subNode);
         }
-
-        CountNodeCommands(node);
-        return count;
     }
 }

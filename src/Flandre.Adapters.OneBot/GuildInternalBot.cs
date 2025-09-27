@@ -23,7 +23,7 @@ public class OneBotGuildInternalBot
     {
         var list = await _mainBot.SendApiRequest("get_guild_list");
         return list.ValueKind == JsonValueKind.Null
-            ? Array.Empty<OneBotGuild>()
+            ? []
             : list.Deserialize<OneBotGuild[]>()!;
     }
 

@@ -90,28 +90,32 @@ public sealed class OneBotWebSocketBot : OneBotBot
 
                 case "request":
                     var requestEvent = json.Deserialize<OneBotApiRequestEvent>()!;
-                    if (requestEvent.RequestType == "group")
+                    switch (requestEvent.RequestType)
                     {
-                        if (requestEvent.SubType == "invite")
+                        case "group" when requestEvent.SubType == "invite":
                             GuildInvited?.Invoke(this, new BotGuildInvitedEvent(
                                 requestEvent.GroupId?.ToString()!, requestEvent.GroupId?.ToString()!,
                                 requestEvent.UserId.ToString(), requestEvent.UserId.ToString(), true)
                             {
                                 EventPayload = requestEvent.Flag
                             });
-                        else if (requestEvent.SubType == "add")
-                            GuildJoinRequested?.Invoke(this, new BotGuildJoinRequestedEvent(
-                                requestEvent.GroupId?.ToString()!, requestEvent.GroupId?.ToString()!,
-                                requestEvent.UserId.ToString(), requestEvent.UserId.ToString(),
-                                requestEvent.Comment) { EventPayload = requestEvent.Flag });
-                    }
-                    else if (requestEvent.RequestType == "friend")
-                    {
-                        FriendRequested?.Invoke(this, new BotFriendRequestedEvent(
-                            requestEvent.UserId.ToString(), requestEvent.UserId.ToString(), requestEvent.Comment)
+                            break;
+                        case "group":
                         {
-                            EventPayload = requestEvent.Flag
-                        });
+                            if (requestEvent.SubType == "add")
+                                GuildJoinRequested?.Invoke(this, new BotGuildJoinRequestedEvent(
+                                    requestEvent.GroupId?.ToString()!, requestEvent.GroupId?.ToString()!,
+                                    requestEvent.UserId.ToString(), requestEvent.UserId.ToString(),
+                                    requestEvent.Comment) { EventPayload = requestEvent.Flag });
+                            break;
+                        }
+                        case "friend":
+                            FriendRequested?.Invoke(this, new BotFriendRequestedEvent(
+                                requestEvent.UserId.ToString(), requestEvent.UserId.ToString(), requestEvent.Comment)
+                            {
+                                EventPayload = requestEvent.Flag
+                            });
+                            break;
                     }
 
                     break;

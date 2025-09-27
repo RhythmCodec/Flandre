@@ -34,7 +34,7 @@ internal sealed class PluginCollection : IPluginCollection
         Configuration = configuration;
     }
 
-    public List<Type> PluginTypes { get; } = new();
+    public List<Type> PluginTypes { get; } = [];
 
     public IServiceCollection Services { get; }
 

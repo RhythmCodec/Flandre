@@ -69,7 +69,7 @@ public class MessageContent : IEnumerable<MessageSegment>
     /// </summary>
     public static implicit operator MessageContent(MessageSegment segment)
     {
-        return new MessageContent(new[] { segment });
+        return new MessageContent([segment]);
     }
 
     /// <summary>
@@ -78,8 +78,8 @@ public class MessageContent : IEnumerable<MessageSegment>
     public static implicit operator MessageContent(string? text)
     {
         return text is null
-            ? new MessageContent(Array.Empty<MessageSegment>())
-            : new MessageContent(new[] { new TextSegment(text) });
+            ? new MessageContent([])
+            : new MessageContent([new TextSegment(text)]);
     }
 
     /// <summary>

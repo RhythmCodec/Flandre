@@ -10,7 +10,7 @@ public class MessageBuilder
     /// <summary>
     /// 已包含消息段
     /// </summary>
-    public List<MessageSegment> Segments = new();
+    public readonly List<MessageSegment> Segments = [];
 
     /// <summary>
     /// 添加文本消息段

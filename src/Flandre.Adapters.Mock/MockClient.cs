@@ -33,7 +33,7 @@ public class MockClient
                 Nickname = "Test Client",
                 UserId = UserId,
                 AvatarUrl = null,
-                Roles = new List<string>()
+                Roles = []
             },
             Content = message
         };

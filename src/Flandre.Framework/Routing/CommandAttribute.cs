@@ -26,7 +26,7 @@ public class CommandAttribute : Attribute
     public CommandAttribute()
     {
         FullName = null;
-        Aliases = Array.Empty<string>();
+        Aliases = [];
     }
 
     /// <summary>

@@ -6,7 +6,7 @@ namespace Flandre.Adapters.Mock;
 
 public class MockAdapter : IAdapter
 {
-    public IEnumerable<Bot> Bots => new[] { Bot };
+    public IEnumerable<Bot> Bots => [Bot];
 
     internal readonly MockBot Bot = new();
 

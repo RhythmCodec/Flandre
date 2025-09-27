@@ -84,7 +84,7 @@ public class OneBotGuildBot : Bot
 
     public override Task<IEnumerable<User>> GetFriendListAsync()
     {
-        return Task.FromResult<IEnumerable<User>>(Array.Empty<User>());
+        return Task.FromResult<IEnumerable<User>>([]);
     }
 
     public override async Task<Guild?> GetGuildAsync(string guildId)
@@ -123,7 +123,7 @@ public class OneBotGuildBot : Bot
                 Name = user.Nickname!,
                 UserId = user.TinyId!,
                 AvatarUrl = user.AvatarUrl,
-                Roles = user.Roles?.Select(r => r.RoleName!).ToList() ?? new List<string>()
+                Roles = user.Roles?.Select(r => r.RoleName!).ToList() ?? []
             };
         }
         catch
@@ -149,7 +149,7 @@ public class OneBotGuildBot : Bot
         {
             Name = m.Nickname!,
             UserId = m.TinyId!,
-            Roles = new List<string> { m.RoleName! }
+            Roles = [m.RoleName!]
         });
     }
 

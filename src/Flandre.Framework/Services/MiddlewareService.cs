@@ -7,5 +7,5 @@ namespace Flandre.Framework.Services;
 /// </summary>
 public sealed class MiddlewareService
 {
-    private readonly List<Func<MiddlewareContext, Func<Task>, Task>> _middleware = new();
+    private readonly List<Func<MiddlewareContext, Func<Task>, Task>> _middleware = [];
 }

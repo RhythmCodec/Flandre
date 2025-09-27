@@ -105,7 +105,7 @@ public abstract partial class Bot
     /// 获取好友列表
     /// </summary>
     public virtual Task<IEnumerable<User>> GetFriendListAsync()
-        => LogNotSupportedAsync<IEnumerable<User>>(nameof(GetFriendListAsync), Array.Empty<User>());
+        => LogNotSupportedAsync<IEnumerable<User>>(nameof(GetFriendListAsync), []);
 
     /// <summary>
     /// 获取群组信息
@@ -118,7 +118,7 @@ public abstract partial class Bot
     /// 获取群组列表
     /// </summary>
     public virtual Task<IEnumerable<Guild>> GetGuildListAsync()
-        => LogNotSupportedAsync<IEnumerable<Guild>>(nameof(GetGuildListAsync), Array.Empty<Guild>());
+        => LogNotSupportedAsync<IEnumerable<Guild>>(nameof(GetGuildListAsync), []);
 
     /// <summary>
     /// 获取群组成员信息
@@ -133,7 +133,7 @@ public abstract partial class Bot
     /// </summary>
     /// <param name="guildId">群组 ID</param>
     public virtual Task<IEnumerable<GuildMember>> GetGuildMemberListAsync(string guildId)
-        => LogNotSupportedAsync<IEnumerable<GuildMember>>(nameof(GetGuildListAsync), Array.Empty<GuildMember>());
+        => LogNotSupportedAsync<IEnumerable<GuildMember>>(nameof(GetGuildListAsync), []);
 
     /// <summary>
     /// 获取频道信息
@@ -148,7 +148,7 @@ public abstract partial class Bot
     /// </summary>
     /// <param name="guildId">群组 ID</param>
     public virtual Task<IEnumerable<Channel>> GetChannelListAsync(string guildId)
-        => LogNotSupportedAsync<IEnumerable<Channel>>(nameof(GetGuildListAsync), Array.Empty<Channel>());
+        => LogNotSupportedAsync<IEnumerable<Channel>>(nameof(GetGuildListAsync), []);
 }
 
 /// <summary>

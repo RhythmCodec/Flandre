@@ -39,7 +39,7 @@ public sealed class CommandOption
     {
         Name = name;
         ShortName = shortName;
-        HasShortName = shortName != default;
+        HasShortName = shortName != 0;
         Type = type;
         DefaultValue = defaultValue;
     }

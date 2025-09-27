@@ -131,7 +131,7 @@ public abstract class OneBotBot : Bot
                 Nickname = member.Card,
                 UserId = member.UserId.ToString(),
                 AvatarUrl = OneBotUtils.GetUserAvatar(member.UserId),
-                Roles = new List<string> { member.Role }
+                Roles = [member.Role]
             };
         }
         catch
@@ -150,7 +150,7 @@ public abstract class OneBotBot : Bot
             Nickname = member.Card,
             UserId = member.UserId.ToString(),
             AvatarUrl = OneBotUtils.GetUserAvatar(member.UserId),
-            Roles = new List<string> { member.Role }
+            Roles = [member.Role]
         });
     }
 

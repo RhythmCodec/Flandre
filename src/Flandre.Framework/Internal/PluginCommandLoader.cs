@@ -64,16 +64,6 @@ internal sealed class PluginCommandLoader
     {
         var toBeAdded = new Dictionary<string, Command>();
 
-        void LoadNodeAliases(CommandNode node)
-        {
-            if (node.HasCommand)
-                foreach (var alias in node.Command!.Aliases)
-                    toBeAdded[alias] = node.Command;
-
-            foreach (var (_, subNode) in node.SubNodes)
-                LoadNodeAliases(subNode);
-        }
-
         LoadNodeAliases(_cmdService.RootNode);
 
         foreach (var (alias, cmd) in toBeAdded)
@@ -95,10 +85,25 @@ internal sealed class PluginCommandLoader
                 }
             }
         }
+
+        return;
+
+        void LoadNodeAliases(CommandNode node)
+        {
+            if (node.HasCommand)
+                foreach (var alias in node.Command!.Aliases)
+                    toBeAdded[alias] = node.Command;
+
+            foreach (var (_, subNode) in node.SubNodes)
+                LoadNodeAliases(subNode);
+        }
     }
 
     internal void LoadCommandShortcuts()
     {
+        LoadNodeShortcuts(_cmdService.RootNode);
+        return;
+
         void LoadNodeShortcuts(CommandNode node)
         {
             if (node.HasCommand)
@@ -125,8 +130,6 @@ internal sealed class PluginCommandLoader
             foreach (var (_, subNode) in node.SubNodes)
                 LoadNodeShortcuts(subNode);
         }
-
-        LoadNodeShortcuts(_cmdService.RootNode);
     }
 
     #endregion

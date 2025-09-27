@@ -48,7 +48,7 @@ public class StringParser
     /// 构造字符串构造解析器实例
     /// </summary>
     public StringParser(string str, params char[] quoteChars)
-        : this(str, quoteChars.ToHashSet(), new HashSet<(char Left, char Right)>())
+        : this(str, quoteChars.ToHashSet(), [])
     {
     }
 

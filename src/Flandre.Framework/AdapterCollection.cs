@@ -24,7 +24,7 @@ internal sealed class AdapterCollection : IAdapterCollection
 {
     public IServiceCollection Services { get; }
 
-    internal List<IAdapter> Adapters { get; } = new();
+    internal List<IAdapter> Adapters { get; } = [];
 
     internal AdapterCollection(IServiceCollection services)
     {
